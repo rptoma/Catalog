@@ -1,23 +1,27 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by toma on 19/05/2017.
  */
 public class Materie {
-    private int id_materie;
-    private String nume_materie;
+    private String id_materie;
     private int nr_credite;
 
-    public Materie(int id_materie, String nume_materie, int nr_credite) {
+    public Materie(String id_materie, int nr_credite) {
         this.id_materie = id_materie;
-        this.nume_materie = nume_materie;
         this.nr_credite = nr_credite;
     }
 
-    public int getId_materie() {
-        return id_materie;
+    public Materie(ResultSet resultSet) throws SQLException {
+        String result_id_materie = (String)resultSet.getObject("id_materie");
+        Integer result_nr_credite = (Integer)resultSet.getObject("nr_credite");
+        id_materie = result_id_materie;
+        nr_credite = result_nr_credite;
     }
 
-    public String getNume_materie() {
-        return nume_materie;
+    public String getId_materie() {
+        return id_materie;
     }
 
     public int getNr_credite() {
@@ -27,8 +31,7 @@ public class Materie {
     @Override
     public String toString() {
         return "Materie{" +
-                "id_materie=" + id_materie +
-                ", nume_materie='" + nume_materie + '\'' +
+                "id_materie='" + id_materie + '\'' +
                 ", nr_credite=" + nr_credite +
                 '}';
     }
