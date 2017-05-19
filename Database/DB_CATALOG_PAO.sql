@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `inscris`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `inscris` (
   `id_student` int(11) NOT NULL,
-  `id_materie` int(11) NOT NULL,
+  `id_materie` varchar(255) NOT NULL,
   PRIMARY KEY (`id_student`,`id_materie`),
-  KEY `fk_id_materie_INSCRIS` (`id_materie`),
-  CONSTRAINT `fk_id_materie_INSCRIS` FOREIGN KEY (`id_materie`) REFERENCES `materie` (`id_materie`),
-  CONSTRAINT `fk_id_student_INSCRIS` FOREIGN KEY (`id_student`) REFERENCES `student` (`id_student`)
+  KEY `fk_id_materie_INSCRIS_idx` (`id_materie`),
+  CONSTRAINT `fk_id_materie_INSCRIS` FOREIGN KEY (`id_materie`) REFERENCES `materie` (`id_materie`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_id_student_INSCRIS` FOREIGN KEY (`id_student`) REFERENCES `student` (`id_student`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +38,7 @@ CREATE TABLE `inscris` (
 
 LOCK TABLES `inscris` WRITE;
 /*!40000 ALTER TABLE `inscris` DISABLE KEYS */;
-INSERT INTO `inscris` VALUES (1,1),(2,1),(3,1),(4,1),(1,2),(2,2),(3,2),(4,2),(1,3),(2,3),(3,3),(5,3);
+INSERT INTO `inscris` VALUES (1,'ASD'),(2,'ASD'),(3,'ASD'),(4,'ASD'),(1,'LOGICA'),(2,'LOGICA'),(3,'LOGICA'),(5,'LOGICA'),(1,'POO'),(2,'POO'),(3,'POO'),(4,'POO');
 /*!40000 ALTER TABLE `inscris` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,10 +50,10 @@ DROP TABLE IF EXISTS `materie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `materie` (
-  `id_materie` int(11) NOT NULL AUTO_INCREMENT,
-  `nume_materie` varchar(255) NOT NULL,
+  `id_materie` varchar(255) NOT NULL,
+  `nr_credite` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_materie`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `materie` (
 
 LOCK TABLES `materie` WRITE;
 /*!40000 ALTER TABLE `materie` DISABLE KEYS */;
-INSERT INTO `materie` VALUES (1,'POO'),(2,'ASD'),(3,'Logica');
+INSERT INTO `materie` VALUES ('ASD',6),('LOGICA',6),('POO',3);
 /*!40000 ALTER TABLE `materie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,10 +75,10 @@ DROP TABLE IF EXISTS `note`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `note` (
   `id_student` int(11) NOT NULL,
-  `id_materie` int(11) NOT NULL,
+  `id_materie` varchar(255) NOT NULL,
   `nota` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_student`,`id_materie`),
-  CONSTRAINT `fk_id_student_materie_NOTE` FOREIGN KEY (`id_student`, `id_materie`) REFERENCES `inscris` (`id_student`, `id_materie`)
+  CONSTRAINT `fk_id_student_materie_NOTE` FOREIGN KEY (`id_student`, `id_materie`) REFERENCES `inscris` (`id_student`, `id_materie`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,7 +88,7 @@ CREATE TABLE `note` (
 
 LOCK TABLES `note` WRITE;
 /*!40000 ALTER TABLE `note` DISABLE KEYS */;
-INSERT INTO `note` VALUES (1,1,10),(1,2,8),(1,3,9),(2,1,4),(2,2,10),(2,3,9),(3,1,8),(3,2,10),(3,3,9),(4,1,5),(4,2,3),(5,3,5);
+INSERT INTO `note` VALUES (1,'ASD',8),(1,'LOGICA',9),(1,'POO',10),(2,'ASD',10),(2,'LOGICA',9),(2,'POO',4),(3,'ASD',10),(3,'LOGICA',9),(3,'POO',8),(4,'ASD',3),(4,'POO',5),(5,'LOGICA',5);
 /*!40000 ALTER TABLE `note` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,8 +103,9 @@ CREATE TABLE `student` (
   `id_student` int(11) NOT NULL AUTO_INCREMENT,
   `prenume` varchar(255) NOT NULL,
   `nume` varchar(255) NOT NULL,
+  `grupa` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_student`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +114,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'Toma','Radu-Petrescu'),(2,'Andrei','Angelescu'),(3,'Radu','Alexandru'),(4,'Manole','Sandolache'),(5,'Silviu','Stan');
+INSERT INTO `student` VALUES (1,'Toma','Radu-Petrescu',242),(2,'Andrei','Angelescu',242),(3,'Alexandru','Radu',242),(4,'Manole','Sandolache',243),(5,'Silviu','Stan',NULL);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -126,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-18 21:36:26
+-- Dump completed on 2017-05-20  2:03:37
