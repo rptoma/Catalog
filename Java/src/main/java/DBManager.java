@@ -18,7 +18,6 @@ public class DBManager {
      */
     private ArrayList<StudentNotaMaterie> toArrayStudentNotaMaterie(ResultSet resultSet) {
 
-        ResultSetMetaData rsmd = null;
         Integer rowsCount = null;
 
         try {
@@ -28,8 +27,6 @@ public class DBManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println(rowsCount);
 
         ArrayList<StudentNotaMaterie> wrappedResult = new ArrayList<StudentNotaMaterie>(rowsCount);
 
