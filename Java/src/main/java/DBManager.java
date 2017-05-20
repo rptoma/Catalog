@@ -15,33 +15,22 @@ public class DBManager {
     In cazul in care in select se afla o coloana nula si atribtuul din obiectul ce reprezinta coloana respectiva va fi null.
     De exemplu, Silviu Stan are coloana grupa nula, deci Student.grupa va fi null
      */
-    private ArrayList<StudentNotaMaterie> toArrayStudentNotaMaterie(ResultSet resultSet) {
+    private ArrayList<StudentNotaMaterie> toArrayStudentNotaMaterie(ResultSet resultSet) throws SQLException {
 
-        Integer rowsCount = null;
-
-        try {
-            resultSet.last();
-            rowsCount = resultSet.getRow();
-            resultSet.beforeFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        resultSet.last();
+        Integer rowsCount = resultSet.getRow();
+        resultSet.beforeFirst();
 
         ArrayList<StudentNotaMaterie> wrappedResult = new ArrayList<StudentNotaMaterie>(rowsCount);
 
-        try {
-            while (resultSet.next()) {
-                Student student = new Student(resultSet);
-                Materie materie = new Materie(resultSet);
-                Nota nota = new Nota(resultSet);
-                wrappedResult.add(new StudentNotaMaterie(student, materie, nota));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (resultSet.next()) {
+            Student student = new Student(resultSet);
+            Materie materie = new Materie(resultSet);
+            Nota nota = new Nota(resultSet);
+            wrappedResult.add(new StudentNotaMaterie(student, materie, nota));
         }
-        finally {
-            return wrappedResult;
-        }
+
+        return wrappedResult;
     }
 
     private void insertStudent(Connection connection, Student studentToInsert) throws SQLException {
@@ -155,26 +144,17 @@ public class DBManager {
      care sunt inscrisi si notele pe care le au.
      Returneaza un ArrayList cu obiecte de tip StudentNotaMaterie reprezentand liniile din interogarea din resultSet
      */
-    public ArrayList<StudentNotaMaterie> getStudentMaterieNote(Connection connect) {
+    public ArrayList<StudentNotaMaterie> getStudentMaterieNote(Connection connect) throws SQLException {
 
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            statement = connect.createStatement();
-            resultSet = statement.executeQuery(
-                    "select " +
-                            "id_student, nume, prenume, grupa, id_materie, nr_credite, nota " +
-                         "from " +
-                            "student s join inscris using(id_student) " +
-                            "join materie using(id_materie) " +
-                            "join note using(id_student, id_materie) " +
-                            "order by grupa, nume, prenume");
-            return toArrayStudentNotaMaterie(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        Statement statement = connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                 "select " +
+                         "id_student, nume, prenume, grupa, id_materie, nr_credite, nota " +
+                      "from " +
+                         "student s join inscris using(id_student) " +
+                         "join materie using(id_materie) " +
+                         "join note using(id_student, id_materie) " +
+                         "order by grupa, nume, prenume");
+        return toArrayStudentNotaMaterie(resultSet);
     }
 }

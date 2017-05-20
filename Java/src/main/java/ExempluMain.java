@@ -8,7 +8,12 @@ public class ExempluMain {
 
     public static void afiseazaStudentiNoteMaterii(Connection connect) {
         DBManager dbManager = new DBManager();
-        ArrayList<StudentNotaMaterie> result = dbManager.getStudentMaterieNote(connect);
+        ArrayList<StudentNotaMaterie> result = null;
+        try {
+            result = dbManager.getStudentMaterieNote(connect);
+        } catch (SQLException e) {
+            System.out.println("Nu s-a putut realiza interogarea (eroare nr." + e.getErrorCode() +")");
+        }
 
         System.out.println("Id Nume Prenume Grupa Materie Credite Nota");
         System.out.println("------------------------------------------");
