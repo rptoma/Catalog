@@ -129,6 +129,10 @@ public class DBManager {
         return null;
     }
 
+    /*
+    Primeste o conexiune SQL si un obiect de tip Student, un String ce reprezinta id-ul materiei si un obiect de tip Nota.
+    In cazul in care cererea de inserare nu are sens (din cauza obiectelor primite de functie), se va arunca o exceptie.
+     */
     public void insertStudentInscrisMaterieNote(Connection connection, Student studentToInsert, String id_materie, Nota notaToInsert) throws SQLException {
 
         try {
