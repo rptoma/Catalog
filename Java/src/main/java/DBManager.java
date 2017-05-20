@@ -1,7 +1,6 @@
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class DBManager {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into student(id_student, nume, prenume) " +
                         "values(?, ?, ?)");
-        preparedStatement.setInt(1, id_student);
+        preparedStatement.setObject(1, id_student);
         preparedStatement.setString(2, nume);
         preparedStatement.setString(3, prenume);
         preparedStatement.executeUpdate();
@@ -71,7 +70,7 @@ public class DBManager {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into inscris(id_student, id_materie) " +
                         "values(?, ?)");
-        preparedStatement.setInt(1, id_student);
+        preparedStatement.setObject(1, id_student);
         preparedStatement.setString(2, id_materie);
         preparedStatement.executeUpdate();
     }
@@ -110,15 +109,18 @@ public class DBManager {
 
     private Materie getMaterie(Connection connection, String id_materie) {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(
+            PreparedStatement preparedStatement = connection.prepareStatement(
                     "select " +
                             "* " +
                          "from " +
                             "materie " +
                          "where " +
-                            "lower(id_materie) = " + '"' + id_materie.toLowerCase() + '"');
-            if (resultSet.next() == true) {
+                                "lower(id_materie) = ?");
+
+            preparedStatement.setString(1, id_materie.toLowerCase());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
                 return new Materie(resultSet);
             }
         } catch (SQLException e) {
