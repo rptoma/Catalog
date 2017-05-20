@@ -41,9 +41,6 @@ public class ExempluMain {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Connection connect = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        DBManager dbManager = new DBManager();
 
         try {
 
