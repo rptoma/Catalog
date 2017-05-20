@@ -51,11 +51,12 @@ public class DBManager {
         Integer grupa = studentToInsert.getGrupa();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into student(id_student, nume, prenume) " +
-                        "values(?, ?, ?)");
-        preparedStatement.setObject(1, id_student);
+                "insert into student(id_student, nume, prenume, grupa) " +
+                        "values(?, ?, ?, ?)");
+        preparedStatement.setInt(1, id_student);
         preparedStatement.setString(2, nume);
         preparedStatement.setString(3, prenume);
+        preparedStatement.setObject(4, grupa);
         preparedStatement.executeUpdate();
     }
 
@@ -70,7 +71,7 @@ public class DBManager {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into inscris(id_student, id_materie) " +
                         "values(?, ?)");
-        preparedStatement.setObject(1, id_student);
+        preparedStatement.setInt(1, id_student);
         preparedStatement.setString(2, id_materie);
         preparedStatement.executeUpdate();
     }
