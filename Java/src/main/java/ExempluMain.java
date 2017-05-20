@@ -50,7 +50,7 @@ public class ExempluMain {
             Class.forName("com.mysql.jdbc.Driver");
             String username = "root";
             String password = "parola123";
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/catalog?autoReconnect=true&useSSL=false", username
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/catalog?useSSL=false", username
                     , password);
 
             /*
