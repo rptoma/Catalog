@@ -60,7 +60,7 @@ public class ExempluMain {
             System.out.println();
 
             /*
-            Asa i se adauaga unui student o nota.
+            Asa se adauaga student + materie + nota.
              */
             insereazaStudent(connect);
             System.out.println();
