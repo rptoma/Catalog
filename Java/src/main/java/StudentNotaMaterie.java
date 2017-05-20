@@ -26,10 +26,10 @@ public class StudentNotaMaterie {
 
     @Override
     public String toString() {
-        return "StudentNotaMaterie{" +
-                "student=" + student +
-                ", materie=" + materie +
-                ", nota=" + nota +
-                '}';
+        return student.toString() + " " + materie.toString() + " " + nota.toString();
+    }
+
+    public String toFormattedString() {
+        return student.toFormattedString() + " " + materie.toFormattedString() + " " + nota.toFormattedString();
     }
 }

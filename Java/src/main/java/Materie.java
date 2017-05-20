@@ -6,7 +6,7 @@ import java.sql.SQLException;
  */
 public class Materie {
     private String id_materie;
-    private int nr_credite;
+    private Integer nr_credite;
 
     public Materie(String id_materie, int nr_credite) {
         this.id_materie = id_materie;
@@ -30,6 +30,10 @@ public class Materie {
 
     @Override
     public String toString() {
+        return id_materie + " " + String.valueOf(nr_credite);
+    }
+
+    public String toFormattedString() {
         return "Materie{" +
                 "id_materie='" + id_materie + '\'' +
                 ", nr_credite=" + nr_credite +

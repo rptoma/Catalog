@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by toma on 19/05/2017.
@@ -7,7 +8,12 @@ public class Main {
 
     public static void afiseazaStudentiNoteMaterii(Connection connect) {
         DBManager dbManager = new DBManager();
-        System.out.println(dbManager.getStudentMaterieNote(connect));
+        ArrayList<StudentNotaMaterie> result = dbManager.getStudentMaterieNote(connect);
+
+        System.out.println("Id_student Nume Prenume Grupa Materie Credite Nota");
+        for(StudentNotaMaterie it : result) {
+            System.out.println(it);
+        }
     }
 
     public static void insereazaStudent(Connection connect) {
@@ -21,9 +27,7 @@ public class Main {
         try {
             dbManager.insertStudentInscrisMaterieNote(connect, student, id_materie, nota);
         } catch (SQLException e) {
-            System.out.println("Nu s-a putut face inserarea.");
-            System.out.println("Eroare nr. " + e.getErrorCode());
-            e.printStackTrace();
+            System.out.println("Nu s-a putut face inserarea. (eroare nr." + e.getErrorCode() +")");
         }
     }
 
@@ -42,15 +46,15 @@ public class Main {
             Asa se face un select pt toti studentii cu materii si notele lor.
              */
             afiseazaStudentiNoteMaterii(connect);
+            System.out.println();
 
             /*
             Asa i se adauaga unui student o nota.
              */
             insereazaStudent(connect);
-
+            System.out.println();
+            
             afiseazaStudentiNoteMaterii(connect);
-
-
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -46,6 +46,10 @@ public class Student {
 
     @Override
     public String toString() {
+        return id_student + " " + nume + " " + prenume + " " + grupa;
+    }
+
+    public String toFormattedString() {
         return "Student{" +
                 "id_student=" + id_student +
                 ", prenume='" + prenume + '\'' +
