@@ -31,6 +31,7 @@ public class ExempluMain {
         String id_materie = "POO";
         Nota nota = new Nota(10);
 
+        System.out.println("S-au inserat valorile!");
 
         try {
             dbManager.insertStudentInscrisMaterieNote(connect, student, id_materie, nota);
