@@ -101,12 +101,6 @@ public class DBManager {
         preparedStatement.setInt(3, nota);
         preparedStatement.execute();
     }
-    /*
-    Primeste o conexiune SQL, un obiect de tip student, un obiect de tip materie si un obiecte de tip nota si insereaza
-    datele in baza de date.
-    In caz de succes, se returneaza true.
-    Altfel, se returneaza false.
-     */
 
     private Materie getMaterie(Connection connection, String id_materie) {
         try {
