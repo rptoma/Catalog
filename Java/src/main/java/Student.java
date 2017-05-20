@@ -10,7 +10,7 @@ public class Student {
     private String nume;
     private Integer grupa;
 
-    public Student(Integer id_student, String prenume, String nume, Integer grupa) {
+    public Student(Integer id_student, String nume, String prenume, Integer grupa) {
         this.id_student = id_student;
         this.prenume = prenume;
         this.nume = nume;
