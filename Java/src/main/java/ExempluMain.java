@@ -6,9 +6,28 @@ import java.util.ArrayList;
  */
 public class ExempluMain {
 
+    public static void afiseazaMaterii(Connection connect) {
+        DBManager dbManager = new DBManager();
+        ArrayList<Materie> result = new ArrayList<Materie>();
+        try {
+            result = dbManager.getMaterii(connect);
+        } catch (SQLException e) {
+            System.out.println("Nu s-a putut realiza interogarea (eroare nr." + e.getErrorCode() +")");
+        }
+
+        System.out.println("Nume(ID) Credite");
+        System.out.println("----------------");
+        for(Materie it : result) {
+            /*
+             sau puteti lua fiecare atribut cu it.get... si sa il prelucrati cum vreti
+             */
+            System.out.println(it);
+        }
+    }
+
     public static void afiseazaStudentiNoteMaterii(Connection connect) {
         DBManager dbManager = new DBManager();
-        ArrayList<StudentNotaMaterie> result = null;
+        ArrayList<StudentNotaMaterie> result = new ArrayList<StudentNotaMaterie>();
         try {
             result = dbManager.getStudentMaterieNote(connect);
         } catch (SQLException e) {
@@ -48,13 +67,15 @@ public class ExempluMain {
     public static void main(String[] args) throws ClassNotFoundException {
         Connection connect = null;
 
-        try {
-
             Class.forName("com.mysql.jdbc.Driver");
             String username = "root";
             String password = "parola123";
+        try {
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/catalog?useSSL=false", username
                     , password);
+        } catch (SQLException e) {
+            System.out.println("Nu s-a putut realiza conexiunea!");
+        }
 
             /*
             Asa se face un select pt toti studentii cu materii si notele lor.
@@ -69,10 +90,13 @@ public class ExempluMain {
             System.out.println();
 
             afiseazaStudentiNoteMaterii(connect);
+            System.out.println();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            /*
+            Asa se face un select pt a afisa toate materiile.
+             */
+            afiseazaMaterii(connect);
+
 
     }
 }

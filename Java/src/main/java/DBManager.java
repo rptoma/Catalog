@@ -33,6 +33,22 @@ public class DBManager {
         return wrappedResult;
     }
 
+    private ArrayList<Materie> toArrayMaterie(ResultSet resultSet) throws SQLException {
+
+        resultSet.last();
+        Integer rowsCount = resultSet.getRow();
+        resultSet.beforeFirst();
+
+        ArrayList<Materie> wrappedResult = new ArrayList<Materie>(rowsCount);
+
+        while (resultSet.next()) {
+            Materie materie = new Materie(resultSet);
+            wrappedResult.add(materie);
+        }
+
+        return wrappedResult;
+    }
+
     private void insertStudent(Connection connection, Student studentToInsert) throws SQLException {
         Integer id_student = studentToInsert.getId_student();
         String nume = studentToInsert.getNume();
@@ -91,6 +107,10 @@ public class DBManager {
         preparedStatement.execute();
     }
 
+    /*
+    Face o interogare a bazei de date si returneaza un ArrayList reprezentant toate materiile ce se afla in baza de date.
+    Functie creata pentru meniu drop-down(HTML <select>)
+     */
     private Materie getMaterie(Connection connection, String id_materie) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -113,6 +133,18 @@ public class DBManager {
         }
 
         return null;
+    }
+
+    public ArrayList<Materie> getMaterii(Connection connect) throws SQLException {
+
+        Statement statement = connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select " +
+                        "* " +
+                     "from " +
+                        "materie " +
+                     "order by id_materie");
+        return toArrayMaterie(resultSet);
     }
 
     /*
