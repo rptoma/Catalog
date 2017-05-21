@@ -186,7 +186,7 @@ public class DBManager {
                          "student s join inscris using(id_student) " +
                          "join materie using(id_materie) " +
                          "join note using(id_student, id_materie) " +
-                         "order by grupa, nume, prenume");
+                         "order by nume, prenume, grupa");
         return toArrayStudentNotaMaterie(resultSet);
     }
 }
