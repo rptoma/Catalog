@@ -1,3 +1,5 @@
+package servlets;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -34,7 +36,7 @@ public class Materie {
     }
 
     public String toFormattedString() {
-        return "Materie{" +
+        return "servlets.Materie{" +
                 "id_materie='" + id_materie + '\'' +
                 ", nr_credite=" + nr_credite +
                 '}';

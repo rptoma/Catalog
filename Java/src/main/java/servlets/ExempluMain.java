@@ -1,3 +1,7 @@
+package servlets;
+
+import servlets.DBManager;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -34,7 +38,7 @@ public class ExempluMain {
             System.out.println("Nu s-a putut realiza interogarea (eroare nr." + e.getErrorCode() +")");
         }
 
-        System.out.println("Id Nume Prenume Grupa Materie Credite Nota");
+        System.out.println("Id Nume Prenume Grupa servlets.Materie Credite servlets.Nota");
         System.out.println("------------------------------------------");
         for(StudentNotaMaterie it : result) {
             /*
@@ -49,7 +53,7 @@ public class ExempluMain {
 
         /*
          In loc de grupa, ar fi putut fi scris si null pt. ca grupa nu este obligatorie in baza de date.
-         Adica, new Student(6,"TestNume", "TestPrenume", null)
+         Adica, new servlets.Student(6,"TestNume", "TestPrenume", null)
          */
         Student student = new Student(6,"TestNume", "TestPrenume", 241);
         String id_materie = "POO";
