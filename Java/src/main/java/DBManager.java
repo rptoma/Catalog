@@ -156,7 +156,15 @@ public class DBManager {
         try {
             Materie materieToInsert = getMaterie(connection, id_materie);
             connection.setAutoCommit(false);
-            insertStudent(connection, studentToInsert);
+
+            try {
+                insertStudent(connection, studentToInsert);
+            }
+            catch (SQLException e) {
+                if(e.getErrorCode() != 1062) {
+                    throw e;
+                }
+            }
             //insertMaterie(connection, studentToInsert, materieToInsert);
             insertInscris(connection, studentToInsert, materieToInsert);
             insertNota(connection, studentToInsert, materieToInsert, notaToInsert);
