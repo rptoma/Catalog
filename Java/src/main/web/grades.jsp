@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Catalog</title>
-    <link href="notestyle/style.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/notestyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

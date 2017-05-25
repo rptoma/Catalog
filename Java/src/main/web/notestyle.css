@@ -1,3 +1,18 @@
-body{
-    background-color: lightblue;
+body {margin:15px;}
+
+input {
+    font-family: Calibri;
+    font-size:1.1em;
+}
+form{
+    font-family: Calibri;
+    font-size: 1.1em;
+    font-weight:bold;
+    padding: 0em;
+}
+option{
+    font-family:Calibri;
+    font-size:1.1em;
+    padding:0em;
+    font-weight:bold;
 }

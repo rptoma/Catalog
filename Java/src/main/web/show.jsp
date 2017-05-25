@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Afisare</title>
-    <link href="${pageContext.request.contextPath}/afisarestyle.css" rel="stylesheet" type="text/css">
+    <link href="afisarestyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

@@ -9,7 +9,7 @@
 <html>
   <head>
     <title>Autentificare</title>
-    <link href="${pageContext.request.contextPath}loginstyle/style.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/loginstyle.css" rel="stylesheet" type="text/css">
   </head>
   <body>
   <form action="${pageContext.request.contextPath}/LoginCatalog" method ="post" >
