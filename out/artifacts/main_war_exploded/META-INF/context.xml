@@ -1,0 +1,15 @@
+<Context>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/view-resolver-servlet.xml</param-value>
+    </init-param>
+    <ResourceLink name="jdbc/CatalogDB"
+
+    global="jdbc/CatalogDB"
+
+    type="javax.sql.DataSource"
+
+    />
+
+
+</Context>
