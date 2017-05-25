@@ -1,0 +1,12 @@
+body {margin:15px;}
+
+input {
+	font-family: Calibri;
+	font-size:1.1em;
+}
+form{
+	font-family: Calibri;
+	font-size: 1.1em;
+	padding: 0px;
+	font-weight:bold;
+}
